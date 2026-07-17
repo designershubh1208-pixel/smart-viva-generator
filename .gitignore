@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.gemini/
+dist/
+build/
+.next/
+backend/uploads/
+.DS_Store
