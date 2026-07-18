@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
+import { API_URL } from "@/config";
 
 interface HistorySession {
   id: string;
@@ -23,7 +24,7 @@ export default function HistoryPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/history")
+    fetch(`${API_URL}/history`)
       .then(res => res.json())
       .then(data => {
         setSessions(data);

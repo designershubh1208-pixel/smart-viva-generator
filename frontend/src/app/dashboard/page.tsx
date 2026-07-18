@@ -9,6 +9,7 @@ import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
+import { API_URL } from "@/config";
 
 interface DashboardStats {
   recentSets: Array<{
@@ -30,7 +31,7 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:3001/dashboard/stats")
+    fetch(`${API_URL}/dashboard/stats`)
       .then(res => res.json())
       .then(data => setStats(data))
       .catch(console.error);

@@ -49,8 +49,8 @@ export class UploadsProcessor extends WorkerHost {
           `;
         }
 
-        // Generate actual viva questions from the text
-        const generatedQs = await this.aiService.generateQuestions(text.substring(0, 10000), 15, 'MEDIUM');
+        // Generate actual viva questions from the text (reduced to 10 for speed)
+        const generatedQs = await this.aiService.generateQuestions(text.substring(0, 10000), 10, 'MEDIUM');
 
         if (generatedQs && generatedQs.length > 0) {
           // Ensure a subject exists

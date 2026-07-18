@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Volume2, ChevronRight, ChevronLeft, Flag, CheckCircle2, Loader2, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { API_URL } from "@/config";
 
 interface Question {
   id: string;
@@ -36,7 +37,7 @@ export function MockViva({ setId }: { setId: string }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/viva/${setId}`)
+    fetch(`${API_URL}/viva/${setId}`)
       .then(res => res.json())
       .then(data => {
         setQuestionSet(data);
@@ -134,7 +135,7 @@ export function MockViva({ setId }: { setId: string }) {
     }));
 
     try {
-      const res = await fetch("http://localhost:3001/viva/evaluate", {
+      const res = await fetch(`${API_URL}/viva/evaluate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

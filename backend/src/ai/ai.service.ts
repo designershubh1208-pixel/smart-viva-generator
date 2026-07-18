@@ -43,7 +43,7 @@ export class AiService {
     Context: ${context}`;
 
     const response = await this.ai.chat.completions.create({
-      model: 'nvidia/llama-3.3-nemotron-super-49b-v1.5',
+      model: 'meta/llama-3.1-8b-instruct',
       messages: [
         { role: 'user', content: prompt }
       ],
@@ -93,7 +93,7 @@ Evaluate if the student's answer is correct, partially correct, or incorrect. Pr
 Return the output strictly in JSON format as an object with 'isCorrect' (boolean) and 'feedback' (string).`;
 
     const response = await this.ai.chat.completions.create({
-      model: 'nvidia/llama-3.3-nemotron-super-49b-v1.5',
+      model: 'meta/llama-3.1-8b-instruct',
       messages: [
         { role: 'user', content: prompt }
       ],
@@ -122,7 +122,7 @@ Return the output strictly in JSON format as an object with 'isCorrect' (boolean
 
   async generateText(prompt: string): Promise<string> {
     const response = await this.ai.chat.completions.create({
-      model: 'nvidia/llama-3.3-nemotron-super-49b-v1.5',
+      model: 'meta/llama-3.1-8b-instruct',
       messages: [{ role: 'user', content: prompt }],
       response_format: { type: 'json_object' }
     });

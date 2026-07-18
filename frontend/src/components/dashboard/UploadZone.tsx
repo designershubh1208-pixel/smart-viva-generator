@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { API_URL } from "@/config";
 
 export function UploadZone() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export function UploadZone() {
       const formData = new FormData();
       formData.append("file", file);
       
-      const res = await fetch("http://localhost:3001/uploads", {
+      const res = await fetch(`${API_URL}/uploads`, {
         method: "POST",
         body: formData,
       });

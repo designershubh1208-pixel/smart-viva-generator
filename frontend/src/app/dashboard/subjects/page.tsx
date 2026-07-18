@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen } from "lucide-react";
+import { API_URL } from "@/config";
 
 interface SubjectData {
   id: string;
@@ -16,7 +17,7 @@ export default function SubjectsPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/subjects")
+    fetch(`${API_URL}/subjects`)
       .then(res => res.json())
       .then(data => {
         setSubjects(data);

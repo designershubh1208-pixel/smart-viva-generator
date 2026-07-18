@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mic, MicOff, Send } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { API_URL } from '@/config';
 
 interface VivaMessage {
   id: string;
@@ -80,7 +81,7 @@ export function VivaChat({ userId, subjectId }: { userId: string; subjectId?: st
   const startSession = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/viva/start', {
+      const res = await fetch(`${API_URL}/viva/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, subjectId })
@@ -110,7 +111,7 @@ export function VivaChat({ userId, subjectId }: { userId: string; subjectId?: st
     setInput('');
 
     try {
-      const res = await fetch(`http://localhost:3001/viva/${currentSessionId}/message`, {
+      const res = await fetch(`${API_URL}/viva/${currentSessionId}/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message, thinkingTimeMs })

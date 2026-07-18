@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { API_URL } from '@/config';
 
 interface DashboardData {
   overallAccuracy: number;
@@ -18,7 +19,7 @@ export function AnalyticsDashboard({ userId }: { userId: string }) {
   const [data, setData] = useState<DashboardData | null>(null);
   
   useEffect(() => {
-    fetch(`http://localhost:3001/analytics/${userId}`)
+    fetch(`${API_URL}/analytics/${userId}`)
       .then(res => res.json())
       .then(setData)
       .catch(err => console.error(err));
