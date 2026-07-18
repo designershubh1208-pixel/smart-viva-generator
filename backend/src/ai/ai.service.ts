@@ -119,4 +119,14 @@ Return the output strictly in JSON format as an object with 'isCorrect' (boolean
       return { isCorrect: false, feedback: 'Error evaluating answer.' };
     }
   }
+
+  async generateText(prompt: string): Promise<string> {
+    const response = await this.ai.chat.completions.create({
+      model: 'nvidia/llama-3.3-nemotron-super-49b-v1.5',
+      messages: [{ role: 'user', content: prompt }],
+      response_format: { type: 'json_object' }
+    });
+    
+    return response.choices?.[0]?.message?.content || '{}';
+  }
 }

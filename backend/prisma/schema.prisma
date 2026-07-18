@@ -19,6 +19,8 @@ model User {
   practiceSessions PracticeSession[]
   uploads          Upload[]
   favorites        Favorite[]
+  vivaSessions     VivaSession[]
+  dailyActivities  DailyActivity[]
 }
 
 model Subject {
@@ -49,8 +51,6 @@ model Question {
   text           String
   expectedAnswer String
   difficulty     String     // EASY, MEDIUM, HARD
-  topicId        String?
-  topic          Topic?     @relation(fields: [topicId], references: [id])
   questionSetId  String
   questionSet    QuestionSet @relation(fields: [questionSetId], references: [id])
   createdAt      DateTime   @default(now())
@@ -59,11 +59,6 @@ model Question {
   favorites      Favorite[]
 }
 
-model Topic {
-  id        String     @id @default(uuid())
-  name      String     @unique
-  questions Question[]
-}
 
 model PracticeSession {
   id        String    @id @default(uuid())
@@ -115,4 +110,39 @@ model Favorite {
   createdAt  DateTime @default(now())
 
   @@unique([userId, questionId])
+}
+
+model VivaSession {
+  id        String        @id @default(uuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id])
+  subjectId String?
+  score     Int?
+  status    String        @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED
+  startTime DateTime      @default(now())
+  endTime   DateTime?
+  messages  VivaMessage[]
+}
+
+model VivaMessage {
+  id             String      @id @default(uuid())
+  vivaSessionId  String
+  vivaSession    VivaSession @relation(fields: [vivaSessionId], references: [id])
+  role           String      // SYSTEM, EXAMINER, STUDENT
+  content        String
+  difficulty     String?     // EASY, MEDIUM, HARD
+  thinkingTimeMs Int?
+  createdAt      DateTime    @default(now())
+}
+
+
+
+model DailyActivity {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  date          DateTime @default(now()) @db.Date
+  questionsDone Int      @default(0)
+  
+  @@unique([userId, date])
 }

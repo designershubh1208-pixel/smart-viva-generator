@@ -13,13 +13,13 @@ export function Hero() {
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-    show: { 
-      opacity: 1, 
-      y: 0, 
-      filter: "blur(0px)",
-      transition: { type: "spring", stiffness: 50, damping: 15 } 
+  const itemVariants: any = {
+    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { type: "spring", stiffness: 300, damping: 24 }
     }
   };
 

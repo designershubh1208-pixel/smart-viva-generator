@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { UploadZone } from "@/components/dashboard/UploadZone";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Brain, Clock, Target } from "lucide-react";
+import { ArrowRight, Brain, Clock } from "lucide-react";
+import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
@@ -42,8 +43,8 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">Ready for your next viva? Upload new material or continue practicing.</p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        <Card className="col-span-1 md:col-span-2 border-primary/20 bg-primary/5">
+      <div className="space-y-6">
+        <Card className="border-primary/20 bg-primary/5">
           <CardHeader>
             <CardTitle>New Generation</CardTitle>
             <CardDescription>Upload files to extract topics and generate viva questions.</CardDescription>
@@ -53,57 +54,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <div className="space-y-6">
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg">Quick Stats</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <div className="bg-primary/10 p-2 rounded-md mr-4">
-                    <Target className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{stats ? `${stats.quickStats.averageScore}%` : '--'}</p>
-                    <p className="text-xs text-muted-foreground">Average Score</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="bg-primary/10 p-2 rounded-md mr-4">
-                    <BookOpen className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{stats ? stats.quickStats.topicsMastered : '--'}</p>
-                    <p className="text-xs text-muted-foreground">Topics Mastered</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-             <CardHeader className="pb-2">
-              <CardTitle className="text-lg">Weak Topics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {stats?.weakTopics && stats.weakTopics.length > 0 ? (
-                <ul className="space-y-2">
-                  {stats.weakTopics.map((topic, i) => (
-                    <li key={i} className="text-sm flex items-center justify-between">
-                      <span>{topic}</span>
-                      <span className="text-destructive font-medium">Needs Work</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className="text-sm text-muted-foreground py-2">
-                  No weak topics identified yet. Keep practicing!
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
+        <AnalyticsDashboard userId="test-user-id" />
       </div>
 
       <div>

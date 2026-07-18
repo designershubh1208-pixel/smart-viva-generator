@@ -6,6 +6,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AiModule } from './ai/ai.module';
 import { UploadsModule } from './uploads/uploads.module';
 import { BullModule } from '@nestjs/bullmq';
+import { VivaModule } from './viva/viva.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { BullModule } from '@nestjs/bullmq';
     PrismaModule,
     AiModule,
     UploadsModule,
+    VivaModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

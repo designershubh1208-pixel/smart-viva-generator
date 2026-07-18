@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, FileText, History, Star, Settings, BrainCircuit } from "lucide-react";
+import { LayoutDashboard, FileText, History, Star, Settings, BrainCircuit, Mic } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "AI Examiner", href: "/ai-viva", icon: Mic },
   { name: "Subjects", href: "/dashboard/subjects", icon: FileText },
   { name: "Practice History", href: "/dashboard/history", icon: History },
   { name: "Favorites", href: "/dashboard/favorites", icon: Star },

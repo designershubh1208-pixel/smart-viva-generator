@@ -29,4 +29,23 @@ export class UploadsController {
     
     return this.uploadsService.uploadFile(file, user.id);
   }
+
+  @Post('image')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('userId') userId: string,
+  ) {
+    let user = await this.prisma.user.findFirst();
+    if (!user) {
+      user = await this.prisma.user.create({
+        data: {
+          email: 'test@example.com',
+          name: 'Test Student'
+        }
+      });
+    }
+    
+    return this.uploadsService.uploadImage(file, user.id);
+  }
 }
