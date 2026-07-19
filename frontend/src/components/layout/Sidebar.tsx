@@ -1,9 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, FileText, History, Star, Settings, BrainCircuit, Mic } from "lucide-react";
+import { LayoutDashboard, FileText, History, Star, Settings, BrainCircuit, Mic, Menu, X } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -16,9 +17,38 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close sidebar when route changes on mobile
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
-    <div className="flex h-full w-64 flex-col bg-card border-r border-border/50">
+    <>
+      {/* Mobile Menu Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden fixed top-4 right-4 z-50 p-2 bg-primary text-primary-foreground rounded-md shadow-md"
+      >
+        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+      </button>
+
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Sidebar Container */}
+      <div
+        className={cn(
+          "fixed inset-y-0 left-0 z-40 flex h-full w-64 flex-col bg-card border-r border-border/50 transform transition-transform duration-200 ease-in-out md:static md:translate-x-0",
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
       <div className="flex h-16 items-center px-6">
         <Link href="/" className="flex items-center space-x-2">
           <div className="bg-primary/20 p-1.5 rounded-lg text-primary">
@@ -63,6 +93,7 @@ export function Sidebar() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
